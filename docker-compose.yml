@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  db:
+    restart: always
+    container_name: mysql_db
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'pass'
+    volumes:
+      - ./data/db:/var/lib/mysql
+
+  covid_reports:
+    restart: always
+    build: .
+    volumes:
+      - .:/backend
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate  && gunicorn --bind=0.0.0.0:8000 covid_reports.wsgi:application --reload"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  nginx:
+    restart: always
+    image: nginx:1.17
+    container_name: ngx
+    ports:
+      - "70:70"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./media:/usr/share/nginx/mediafiles:ro
+    depends_on:
+      - covid_reports

@@ -1,3 +1,0 @@
-Django==4.0.3
-csvfile==3.4
-mysqlclient==2.1.0

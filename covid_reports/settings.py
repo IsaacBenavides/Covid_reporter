@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'covid_reports.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'covid_reports',
-        'USER': 'user_db',
-        'PASSWORD': 'admin@1234',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'db',
+        'USER': 'user',
+        'PASSWORD': 'pass',
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
 

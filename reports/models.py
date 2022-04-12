@@ -9,8 +9,6 @@ class CovidRegister(models.Model):
         max_length=255, blank=False, null=False, default="")
     new_deaths_per_million = models.FloatField(
         blank=False, null=False, default=0)
-    new_vaccinations_smoothed_per_hundred = models.FloatField(
-        blank=False, null=False, default=0)
     date = models.DateField(blank=False, null=False)
     total_cases = models.DecimalField(
         blank=False, null=False, max_digits=20, decimal_places=2, default=0)

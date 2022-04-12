@@ -1,6 +1,6 @@
 # Getting Started
 
-### Dependencies
+## Dependencies
 
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)

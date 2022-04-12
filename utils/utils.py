@@ -1,6 +1,6 @@
 import csv
 import datetime
-from reports.models import CovidRegister
+from apps.reports.models import CovidRegister
 
 
 class Utils:
@@ -9,15 +9,10 @@ class Utils:
         pass
 
     def read_csv(self):
-        print("===================================")
-        print("Guardando datos...")
-        print("Estamos guardando los datos que usaremos en la base de datos. Espere a que termine.")
         with open("files/data.csv") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 self.save_data(row)
-        print("datos guardados.")
-        print("===================================")
 
     def save_data(self, args):
         date = datetime.datetime.strptime(args['date'], '%Y-%m-%d').date()

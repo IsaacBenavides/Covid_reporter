@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+    {% block Title %}
+        Initial
+    {% endblock %}
+    {% block content %}
+
+        <div class="body-initial">
+            <a class="btn btn-secondary btn-lg button-load" href="{% url 'reports:load_data' %}">
+                <p class="h1">
+                    Load data
+                </p>
+            </a>
+        </div>
+
+    {% endblock %}

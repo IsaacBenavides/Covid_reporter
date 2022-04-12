@@ -4,5 +4,4 @@ from .models import CovidRegister
 
 
 def show_reports(request):
-
     return render(request, 'test.html')

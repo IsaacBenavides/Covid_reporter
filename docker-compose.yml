@@ -21,20 +21,8 @@ services:
     volumes:
       - .:/backend
     command: >
-      sh -c "python manage.py makemigrations && python manage.py migrate  && gunicorn --bind=0.0.0.0:8000 covid_reports.wsgi:application --reload"
+      sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
     depends_on:
       - db
-
-  nginx:
-    restart: always
-    image: nginx:1.17
-    container_name: ngx
-    ports:
-      - "70:70"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./media:/usr/share/nginx/mediafiles:ro
-    depends_on:
-      - covid_reports

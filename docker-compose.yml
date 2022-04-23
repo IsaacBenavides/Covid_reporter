@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 services:
   db:
@@ -8,15 +8,15 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: 'db'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'pass'
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "db"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "pass"
     volumes:
       - ./data/db:/var/lib/mysql
 
   covid_reports:
-    restart: always
+    restart: on-failure
     build: .
     volumes:
       - .:/backend

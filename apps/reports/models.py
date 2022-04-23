@@ -1,15 +1,21 @@
 from django.db import models
 
 
-class CovidRegister(models.Model):
-
-    iso_code = models.CharField(max_length=20, blank=False, null=False)
+class Location(models.Model):
+    iso_code = models.CharField(max_length=20, blank=False, null=False, unique=True)
     continent = models.CharField(max_length=255, blank=False, null=False)
     location = models.CharField(
         max_length=255, blank=False, null=False, default="")
+
+    def __str__(self):
+        return f" {self.iso_code} - {self.continent} - {self.location}"
+
+class CovidRegister(models.Model):
+
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    date = models.DateField(blank=False, null=False)
     new_deaths_per_million = models.FloatField(
         blank=False, null=False, default=0)
-    date = models.DateField(blank=False, null=False)
     total_cases = models.DecimalField(
         blank=False, null=False, max_digits=20, decimal_places=2, default=0)
     new_cases = models.DecimalField(

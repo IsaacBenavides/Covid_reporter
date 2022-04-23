@@ -1,10 +1,9 @@
 from django.urls import path
-from .views import initial, load_data
+from .views import Initial, LoadData
 
 app_name = 'reports'
 
 urlpatterns = [
-    path('', initial, name='initial'),
-    path('home/', load_data, name='load_data'),
-
+    path('', Initial.as_view(), name='initial'),
+    path('home/', LoadData.as_view(), name='load_data'),
 ]

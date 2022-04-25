@@ -9,12 +9,11 @@ class Initial(TemplateView):
     redirect_url = 'reports:load_data'
 
 class LoadData(TemplateView):
-    template_name = 'test.html'
-
+    template_name = 'home.html'
     def get(self, request, *args, **kwargs):
         if(CovidRegister.objects.all().count() == 0):
             Utils().read_csv()
-        return render(request, "test.html")
+        return render(request, "home.html")
     
 
 

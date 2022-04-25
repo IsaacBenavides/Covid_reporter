@@ -12,7 +12,7 @@ class Location(models.Model):
 
 class CovidRegister(models.Model):
 
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
     date = models.DateField(blank=False, null=False)
     new_deaths_per_million = models.FloatField(
         blank=False, null=False, default=0)
@@ -139,7 +139,7 @@ class CovidRegister(models.Model):
         blank=False, null=False, max_digits=20, decimal_places=2, default=0)
 
     def __str__(self) -> str:
-        return self.location
+        return self.location.location
 
     class Meta:
         db_table = 'covid_register'

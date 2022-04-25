@@ -1,4 +1,366 @@
 {% extends 'base.html' %}
 
 {% block content %}
+	<div class="col">
+		<div class="row mr-5 ml-5">
+			<div class="col-6 mt-5">
+				<p class="title-chart" width="40vw">Total Cases</p>
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class="col-6 mt-5">
+				<p class="title-chart">Total Deaths</p>
+				<canvas id="secondChart"></canvas>
+			</div>
+		</div>
+		<div class="row mr-5 ml-5">
+			<div class="col-6 mt-5">
+				<p class="title-chart">New Cases</p>
+				<canvas id="thirdChart"></canvas>
+			</div>
+			<div class="col-6 mt-5">
+				<p class="title-chart">New Deaths</p>
+				<canvas id="fourthChart"></canvas>
+			</div>
+		</div>
+	</div>
+	<script>
+		var locations = []
+		var datasets = []
+		var dates = [];
+		noParseLocations = "{{locations}}".replace("[", "").replace("]", "").split(",");
+		noParseLocations.map((value, index) => {
+			replacedValues = value.replace(" ", "").replace("&#x27;", "").replace("&#x27;", "")
+			console.log()
+			locations.push(replacedValues)
+		})
+		var afg_total_cases = JSON.parse("{{Afghanistan.total_cases}}")
+		var afg_dates = []
+		"{{Afghanistan.dates}}".split(",").map((value, index) => {
+			afg_dates.push(value.replace("[", "").replace("]", "").replace("&quot;", "").replace("&quot;", ""))
+		})
+
+		var afr_total_cases = JSON.parse("{{Africa.total_cases}}")
+		var alb_total_cases = JSON.parse("{{Albania.total_cases}}")
+		var alg_total_cases = JSON.parse("{{Algeria.total_cases}}")
+		var and_total_cases = JSON.parse("{{Andorra.total_cases}}")
+		var ang_total_cases = JSON.parse("{{Angola.total_cases}}")
+		var aia_total_cases = JSON.parse("{{Anguilla.total_cases}}")
+		var atg_total_cases = JSON.parse("{{AntiguaandBarbuda.total_cases}}")
+		var arg_total_cases = JSON.parse("{{Argentina.total_cases}}")
+		var arm_total_cases = JSON.parse("{{Armenia.total_cases}}")
+
+		datasets.push({
+			label: 'Afghanistan',
+			data: afg_total_cases,
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1
+		}, {
+			label: 'Africa',
+			data: afr_total_cases,
+			backgroundColor: 'rgba(54, 162, 235, 0.2)',
+			borderColor: 'rgba(54, 162, 235, 1)',
+			borderWidth: 1
+		}, {
+			label: 'Albania',
+			data: alb_total_cases,
+			backgroundColor: 'rgba(255, 206, 86, 0.2)',
+			borderColor: 'rgba(255, 206, 86, 1)',
+			borderWidth: 1
+		}, 
+		   		{
+			label: 'Algeria',
+			data: alg_total_cases,
+			backgroundColor: 'rgba(75, 192, 192, 0.2)',
+			borderColor: 'rgba(75, 192, 192, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Andorra',
+			data: and_total_cases,
+			backgroundColor: 'rgba(153, 102, 255, 0.2)',
+			borderColor: 'rgba(153, 102, 255, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Angola',
+			data: ang_total_cases,
+			backgroundColor: 'rgba(255, 159, 64, 0.2)',
+			borderColor: 'rgba(255, 159, 64, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Anguilla',
+			data: aia_total_cases,
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Antigua and Barbuda',
+			data: atg_total_cases,
+			backgroundColor: 'rgba(54, 162, 235, 0.2)',
+			borderColor: 'rgba(54, 162, 235, 1)',
+			borderWidth: 1
+		}
+		);
+		const data = {
+		  labels: afg_dates,
+		  datasets: datasets
+		};
+		const config = {
+		  type: 'line',
+		  data: data,
+		
+		};
+		const myChart = new Chart(
+		  document.getElementById('myChart'),
+		  config
+		);
+	</script>
+	<script>
+		datasets2 = []
+		var afg_total_deaths = JSON.parse("{{Afghanistan.total_deaths}}")
+		var afr_total_deaths = JSON.parse("{{Africa.total_deaths}}")
+		var alb_total_deaths = JSON.parse("{{Albania.total_deaths}}")
+		var alg_total_deaths = JSON.parse("{{Algeria.total_deaths}}")
+		var and_total_deaths = JSON.parse("{{Andorra.total_deaths}}")
+		var ang_total_deaths = JSON.parse("{{Angola.total_deaths}}")
+		var aia_total_deaths = JSON.parse("{{Anguilla.total_deaths}}")
+		var atg_total_deaths = JSON.parse("{{AntiguaandBarbuda.total_deaths}}")
+		var arg_total_deaths = JSON.parse("{{Argentina.total_deaths}}")
+		var arm_total_deaths = JSON.parse("{{Armenia.total_deaths}}")
+
+		datasets2.push({
+			label: 'Afghanistan',
+			data: afg_total_deaths,
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1
+		}, {
+			label: 'Africa',
+			data: afr_total_deaths,
+			backgroundColor: 'rgba(54, 162, 235, 0.2)',
+			borderColor: 'rgba(54, 162, 235, 1)',
+			borderWidth: 1
+		}, {
+			label: 'Albania',
+			data: alb_total_deaths,
+			backgroundColor: 'rgba(255, 206, 86, 0.2)',
+			borderColor: 'rgba(255, 206, 86, 1)',
+			borderWidth: 1
+		}, 
+		   		{
+			label: 'Algeria',
+			data: alg_total_deaths,
+			backgroundColor: 'rgba(75, 192, 192, 0.2)',
+			borderColor: 'rgba(75, 192, 192, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Andorra',
+			data: and_total_deaths,
+			backgroundColor: 'rgba(153, 102, 255, 0.2)',
+			borderColor: 'rgba(153, 102, 255, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Angola',
+			data: ang_total_deaths,
+			backgroundColor: 'rgba(255, 159, 64, 0.2)',
+			borderColor: 'rgba(255, 159, 64, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Anguilla',
+			data: aia_total_deaths,
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1
+		}, 
+		{
+			label: 'Antigua and Barbuda',
+			data: atg_total_deaths,
+			backgroundColor: 'rgba(54, 162, 235, 0.2)',
+			borderColor: 'rgba(54, 162, 235, 1)',
+			borderWidth: 1
+		});
+		const data2 = {
+		  labels: afg_dates,
+		  datasets: datasets2
+		};
+		const config2 = {
+		  type: 'line',
+		  data: data2,
+		
+		};
+		const death_chart = new Chart(
+		  document.getElementById('secondChart'),
+		  config2
+		);
+	</script>
+
+<script>
+	datasets3 = []
+	var afg_new_cases = JSON.parse("{{Afghanistan.new_cases}}")
+	var afr_new_cases = JSON.parse("{{Africa.new_cases}}")
+	var alb_new_cases = JSON.parse("{{Albania.new_cases}}")
+	var alg_new_cases = JSON.parse("{{Algeria.new_cases}}")
+	var and_new_cases = JSON.parse("{{Andorra.new_cases}}")
+	var ang_new_cases = JSON.parse("{{Angola.new_cases}}")
+	var aia_new_cases = JSON.parse("{{Anguilla.new_cases}}")
+	var atg_new_cases = JSON.parse("{{AntiguaandBarbuda.new_cases}}")
+	var arg_new_cases = JSON.parse("{{Argentina.new_cases}}")
+	var arm_new_cases = JSON.parse("{{Armenia.new_cases}}")
+
+	datasets3.push({
+		label: 'Afghanistan',
+		data: afg_new_cases,
+		backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		borderColor: 'rgba(255, 99, 132, 1)',
+		borderWidth: 1
+	}, {
+		label: 'Africa',
+		data: afr_new_cases,
+		backgroundColor: 'rgba(54, 162, 235, 0.2)',
+		borderColor: 'rgba(54, 162, 235, 1)',
+		borderWidth: 1
+	}, {
+		label: 'Albania',
+		data: alb_new_cases,
+		backgroundColor: 'rgba(255, 206, 86, 0.2)',
+		borderColor: 'rgba(255, 206, 86, 1)',
+		borderWidth: 1
+	}, 
+			   {
+		label: 'Algeria',
+		data: alg_new_cases,
+		backgroundColor: 'rgba(75, 192, 192, 0.2)',
+		borderColor: 'rgba(75, 192, 192, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Andorra',
+		data: and_new_cases,
+		backgroundColor: 'rgba(153, 102, 255, 0.2)',
+		borderColor: 'rgba(153, 102, 255, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Angola',
+		data: ang_new_cases,
+		backgroundColor: 'rgba(255, 159, 64, 0.2)',
+		borderColor: 'rgba(255, 159, 64, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Anguilla',
+		data: aia_new_cases,
+		backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		borderColor: 'rgba(255, 99, 132, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Antigua and Barbuda',
+		data: atg_new_cases,
+		backgroundColor: 'rgba(54, 162, 235, 0.2)',
+		borderColor: 'rgba(54, 162, 235, 1)',
+		borderWidth: 1
+	});
+	const data3 = {
+	  labels: afg_dates,
+	  datasets: datasets3
+	};
+	const config3 = {
+	  type: 'line',
+	  data: data3,
+	
+	};
+	const news_cases_charts = new Chart(
+	  document.getElementById('thirdChart'),
+	  config3
+	);
+</script>
+
+<script>
+	datasets4 = []
+	var afg_new_deaths = JSON.parse("{{Afghanistan.new_deaths}}")
+	var afr_new_deaths = JSON.parse("{{Africa.new_deaths}}")
+	var alb_new_deaths = JSON.parse("{{Albania.new_deaths}}")
+	var alg_new_deaths = JSON.parse("{{Algeria.new_deaths}}")
+	var and_new_deaths = JSON.parse("{{Andorra.new_deaths}}")
+	var ang_new_deaths = JSON.parse("{{Angola.new_deaths}}")
+	var aia_new_deaths = JSON.parse("{{Anguilla.new_deaths}}")
+	var atg_new_deaths = JSON.parse("{{AntiguaandBarbuda.new_deaths}}")
+	var arg_new_deaths = JSON.parse("{{Argentina.new_deaths}}")
+	var arm_new_deaths = JSON.parse("{{Armenia.new_deaths}}")
+
+	datasets4.push({
+		label: 'Afghanistan',
+		data: afg_new_deaths,
+		backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		borderColor: 'rgba(255, 99, 132, 1)',
+		borderWidth: 1
+	}, {
+		label: 'Africa',
+		data: afr_new_deaths,
+		backgroundColor: 'rgba(54, 162, 235, 0.2)',
+		borderColor: 'rgba(54, 162, 235, 1)',
+		borderWidth: 1
+	}, {
+		label: 'Albania',
+		data: alb_new_deaths,
+		backgroundColor: 'rgba(255, 206, 86, 0.2)',
+		borderColor: 'rgba(255, 206, 86, 1)',
+		borderWidth: 1
+	}, 
+			   {
+		label: 'Algeria',
+		data: alg_new_deaths,
+		backgroundColor: 'rgba(75, 192, 192, 0.2)',
+		borderColor: 'rgba(75, 192, 192, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Andorra',
+		data: and_new_deaths,
+		backgroundColor: 'rgba(153, 102, 255, 0.2)',
+		borderColor: 'rgba(153, 102, 255, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Angola',
+		data: ang_new_deaths,
+		backgroundColor: 'rgba(255, 159, 64, 0.2)',
+		borderColor: 'rgba(255, 159, 64, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Anguilla',
+		data: aia_new_deaths,
+		backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		borderColor: 'rgba(255, 99, 132, 1)',
+		borderWidth: 1
+	}, 
+	{
+		label: 'Antigua and Barbuda',
+		data: atg_new_deaths,
+		backgroundColor: 'rgba(54, 162, 235, 0.2)',
+		borderColor: 'rgba(54, 162, 235, 1)',
+		borderWidth: 1
+	});
+	const data4 = {
+	  labels: afg_dates,
+	  datasets: datasets4
+	};
+	const config4 = {
+	  type: 'line',
+	  data: data4,
+	
+	};
+	const new_deaths = new Chart(
+	  document.getElementById('fourthChart'),
+	  config4
+	);
+</script>
 {% endblock %}

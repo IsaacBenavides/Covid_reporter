@@ -11,3 +11,7 @@
 - `sudo docker-compose up` (Ubuntu)
 - `docker-compose build` (Windows)
 - `docker-compose up` (Windows)
+
+## How to enter to database
+
+- `sudo docker exec -it mysql_db /bin/bash` (Ubuntu)
